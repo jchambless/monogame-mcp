@@ -1948,7 +1948,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/build-run.ts, tests/tools/build-run.test.ts`
   - Pre-commit: `npx vitest run tests/tools/build-run.test.ts`
 
-- [ ] 17. Resources — API Reference, Code Examples, Content Pipeline, Platform Guides
+- [x] 17. Resources — API Reference, Code Examples, Content Pipeline, Platform Guides
 
   **What to do**:
   - Create `src/resources/index.ts` that registers all 4 resource types
@@ -2055,7 +2055,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/resources/index.ts, tests/resources/resources.test.ts`
   - Pre-commit: `npx vitest run tests/resources/resources.test.ts`
 
-- [ ] 18. Prompts — Code Review, Error Troubleshooting, Architecture Planning, Feature Implementation
+- [x] 18. Prompts — Code Review, Error Troubleshooting, Architecture Planning, Feature Implementation
 
   **What to do**:
   - Create `src/prompts/index.ts` that registers all 4 prompt templates
