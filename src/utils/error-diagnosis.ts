@@ -396,9 +396,9 @@ const ERROR_PATTERNS: ErrorPattern[] = [
  * ```typescript
  * const diagnosis = diagnoseError('ContentLoadException: Could not find asset');
  * if (diagnosis) {
- *   console.log(`Error Type: ${diagnosis.errorType}`);
- *   console.log(`Cause: ${diagnosis.cause}`);
- *   diagnosis.solution.forEach(step => console.log(`- ${step}`));
+ *   console.error(`Error Type: ${diagnosis.errorType}`);
+ *   console.error(`Cause: ${diagnosis.cause}`);
+ *   diagnosis.solution.forEach(step => console.error(`- ${step}`));
  * }
  * ```
  */
@@ -426,8 +426,8 @@ export function diagnoseError(errorMessage: string): ErrorDiagnosis | null {
  * @example
  * ```typescript
  * const patterns = listErrorPatterns();
- * console.log(`Total patterns: ${patterns.length}`);
- * patterns.forEach(p => console.log(`- ${p.description} (${p.errorType})`));
+ * console.error(`Total patterns: ${patterns.length}`);
+ * patterns.forEach(p => console.error(`- ${p.description} (${p.errorType})`));
  * ```
  */
 export function listErrorPatterns(): ErrorPattern[] {
