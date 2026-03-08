@@ -1,0 +1,3 @@
+npx tsc --noEmit
+exit code: 0
+output: (no TypeScript errors)

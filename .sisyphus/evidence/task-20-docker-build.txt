@@ -1,0 +1,77 @@
+#0 building with "default" instance using docker-container driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.24kB 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/node:20-slim
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 549B 0.0s done
+#3 DONE 0.1s
+
+#4 [builder 1/7] FROM docker.io/library/node:20-slim@sha256:a82f40540f5959e0003fb7b3c0f80490def2927be8bdbee7e3e0ac65cce3be92
+#4 resolve docker.io/library/node:20-slim@sha256:a82f40540f5959e0003fb7b3c0f80490def2927be8bdbee7e3e0ac65cce3be92 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 3.73kB 0.1s done
+#5 DONE 0.1s
+
+#6 [stage-1 4/7] COPY --from=builder /app/build ./build
+#6 CACHED
+
+#7 [builder 5/7] COPY tsconfig.json ./
+#7 CACHED
+
+#8 [stage-1 3/7] WORKDIR /app
+#8 CACHED
+
+#9 [stage-1 5/7] COPY --from=builder /app/src/docs ./src/docs
+#9 CACHED
+
+#10 [builder 2/7] WORKDIR /app
+#10 CACHED
+
+#11 [builder 4/7] RUN npm ci
+#11 CACHED
+
+#12 [builder 3/7] COPY package*.json ./
+#12 CACHED
+
+#13 [stage-1 2/7] RUN apt-get update && apt-get install -y wget &&     wget https://dot.net/v1/dotnet-install.sh &&     chmod +x dotnet-install.sh &&     ./dotnet-install.sh --channel 8.0 &&     rm dotnet-install.sh &&     apt-get remove -y wget && apt-get autoremove -y &&     rm -rf /var/lib/apt/lists/*
+#13 CACHED
+
+#14 [builder 6/7] COPY src/ ./src/
+#14 CACHED
+
+#15 [builder 7/7] RUN npm run build
+#15 CACHED
+
+#16 [stage-1 6/7] COPY --from=builder /app/node_modules ./node_modules
+#16 CACHED
+
+#17 [stage-1 7/7] COPY package.json ./
+#17 CACHED
+
+#18 exporting to docker image format
+#18 exporting layers
+#18 exporting layers 15.7s done
+#18 exporting manifest sha256:20b8d8c7c0aab121df629b76698308a5408cf491c89f48b2bca970406e8cfab3 0.0s done
+#18 exporting config sha256:529ef40f8d1fa923688518919f2b02e2c555252ab47497e28a64379e91136060 0.0s done
+#18 sending tarball
+#18 ...
+
+#19 importing to docker
+#19 DONE 0.0s
+
+#18 exporting to docker image format
+#18 sending tarball 13.1s done
+#18 DONE 28.9s
+
+View build details: docker-desktop://dashboard/build/default/default/ucxg92velg3l2x8aasjq0mqdb
+
+What's Next?
+  1. Sign in to your Docker account → docker login
+  2. View a summary of image vulnerabilities and recommendations → docker scout quickview

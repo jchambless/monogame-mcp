@@ -1,0 +1,36 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mServer lifecycle[2m > [22minitializes and exposes server capabilities
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mServer lifecycle[2m > [22mlists all 7 tools, all resource types, and all 4 prompts
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mServer lifecycle[2m > [22mshuts down cleanly
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_api_lookup returns SpriteBatch documentation
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_api_lookup handles invalid query with validation message
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_diagnose_error diagnoses content file errors
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_diagnose_error references content-pipeline docs that map to valid resources
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_scaffold_code returns game-class C# template
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_scaffold_code lists all templates
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_scaffold_code returns error message for invalid template
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_create_project succeeds with mocked subprocess calls
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_manage_content list action parses mgcb entries
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_manage_content add action updates mgcb content
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_build_content returns build output with mocked mgcb process
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_build_run build action returns build output
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mTool integration[2m > [22mmonogame_build_run run action includes run output
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mResource integration[2m > [22mreads monogame://api/SpriteBatch
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mResource integration[2m > [22mreads monogame://examples/input-handling
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mResource integration[2m > [22mreads monogame://content-pipeline/overview
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mResource integration[2m > [22mreads monogame://platforms/desktopgl
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mPrompt integration[2m > [22mmonogame_code_review returns user-role prompt messages with methodology
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mPrompt integration[2m > [22mmonogame_troubleshoot includes provided error argument in user message
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mPrompt integration[2m > [22mmonogame_architecture includes architecture guidance patterns
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mPrompt integration[2m > [22mmonogame_implement_feature includes requested feature in message
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mError handling[2m > [22mreturns error for invalid tool name
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mError handling[2m > [22mreturns zod validation errors for invalid tool arguments
+ [32m✓[39m tests/integration/server-e2e.test.ts[2m > [22mMonoGame MCP Server E2E Integration[2m > [22mError handling[2m > [22mreturns error response for invalid resource URI
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m27 passed[39m[22m[90m (27)[39m
+[2m   Start at [22m 19:15:28
+[2m   Duration [22m 1.43s[2m (transform 162ms, setup 0ms, collect 880ms, tests 169ms, environment 0ms, prepare 178ms)[22m
+

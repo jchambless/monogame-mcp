@@ -1409,3 +1409,63 @@ Each prompt includes domain-specific knowledge:
 - CLI entry point functional ✓
 - Ready for npm publish (when needed) ✓
 
+
+## 2024-03-08 Task 21: README Documentation
+
+### Execution Summary
+Created a comprehensive README.md for the MonoGame MCP server, documenting all tools, resources, and prompts. The documentation follows a clear structure aimed at developers and AI assistants.
+
+### Documentation Structure
+- **Quick Start**: 3-step onboarding.
+- **Prerequisites**: Dotnet SDK, MonoGame templates, and Node.js.
+- **Available Tools**: Detailed table of all 7 tools with example usage.
+- **Available Resources**: All 4 resource URI schemes documented.
+- **Available Prompts**: All 4 prompts with arguments.
+- **Real-world Examples**: scenarios for project creation, API lookup, troubleshooting, and scaffolding.
+
+### Verification Results
+- **Line Count**: 125 lines (well within the 500-line limit).
+- **Completeness**: All tools, resources, and prompts are documented and correctly named.
+- **Configuration**: Claude Desktop config example included.
+
+## [2026-03-08 19:11] Task 20: Docker Image with Multi-Stage Build
+
+### Execution Summary
+Created Docker image for MonoGame MCP server using multi-stage build pattern. Image size: 895MB (includes Node.js 20 + .NET SDK 8.0 + compiled server + docs). TDD approach with 9 test cases covering Dockerfile structure, .dockerignore patterns, and proper multi-stage build verification.
+
+### Key Technical Decisions
+- **Two-stage build**: Builder stage (node:20-slim) compiles TypeScript with full dev dependencies. Production stage (node:20-slim) includes only runtime artifacts.
+- **.NET SDK installation**: Used dotnet-install.sh script to install .NET SDK 8.0 in production stage. Added /root/.dotnet to PATH environment variable.
+- **COPY from builder**: Explicitly copied build/, src/docs/, node_modules/, and package.json from builder to production stage.
+- **Docker buildkit**: Initial build without --load flag succeeded but didn't store image in local registry. Rebuild with --load flag properly loaded image.
+- **Stdio transport**: ENTRYPOINT runs node build/index.js (no port exposure). Server communicates via stdio, not HTTP.
+- **.dockerignore patterns**: Excluded node_modules, build, tests, .sisyphus, .git, markdown files (except src/docs/**/*.md).
+
+### Verification Results
+- **Docker build**: ✅ Success (exit code 0, image size 895MB)
+- **Container test**: ✅ JSON-RPC initialize request returned valid response with server capabilities
+- **Vitest tests**: ✅ All 9 tests passed (Dockerfile structure, multi-stage pattern, builder/production stages, ENTRYPOINT, .dockerignore exclusions, no port exposure, base image verification)
+- **Evidence files**: task-20-docker-build.txt (2312 bytes), task-20-docker-run.txt (178 bytes), task-20-tests.txt (468 bytes)
+## [2026-03-08 19:16] Task 22: Integration Test Suite
+
+### Execution Summary
+- Added `tests/integration/server-e2e.test.ts` with full MCP end-to-end coverage over InMemoryTransport using real request paths (`tools/list`, `tools/call`, `resources/list/read`, `prompts/list/get`) and isolated per-test server/client setup.
+- Implemented deterministic subprocess mocking (`checkPrerequisite`, `executeCommand`) to guarantee zero real `dotnet`/`mgcb` execution while still exercising tool behavior for `create_project`, `build_content`, and `build_run`.
+
+### Test Coverage
+- Total integration cases: **27** (>=20 required).
+- Lifecycle coverage: initialize/capabilities check, list verification for tools/resources/prompts, clean shutdown.
+- Tool coverage: all 7 tools (`api_lookup`, `create_project`, `manage_content`, `build_content`, `scaffold_code`, `diagnose_error`, `build_run`) including invalid template/invalid args flows.
+- Resource coverage: all 4 URI families (`api`, `examples`, `content-pipeline`, `platforms`) plus invalid resource type behavior.
+- Prompt coverage: all 4 prompts (`code_review`, `troubleshoot`, `architecture`, `implement_feature`) including argument injection validation.
+- Cross-feature coverage: diagnosis doc links mapped to valid `monogame://content-pipeline/*` resource URI and verified via `readResource`.
+
+### Verification Results
+- `npx vitest run tests/integration/server-e2e.test.ts --reporter=verbose` -> **27 passed, 0 failed**.
+- `npx vitest run` -> **243 passed, 0 failed** (unit + integration).
+- `npx tsc --noEmit` -> **0 TypeScript errors**.
+- Evidence files generated:
+  - `.sisyphus/evidence/task-22-integration-tests.txt`
+  - `.sisyphus/evidence/task-22-full-suite.txt`
+  - `.sisyphus/evidence/task-22-tsc-check.txt`
+
