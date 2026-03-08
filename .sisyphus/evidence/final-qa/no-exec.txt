@@ -1,0 +1,2 @@
+src/tools/build-content.ts:  const processedMatch = /Processed\s+(\d+)\s+files?/i.exec(stdout);
+src/tools/build-content.ts:  const buildMatch = /Build\s+(\d+)\s+files?/i.exec(stdout);
