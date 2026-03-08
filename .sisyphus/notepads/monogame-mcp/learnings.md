@@ -146,3 +146,67 @@ tests/
 ### Next Steps
 - Task 2: Replace local mocks with real SDK once available
 - Task 4+: Implement tool handlers, resources, prompts
+
+---
+
+## [2026-03-08 17:56] Task 1 Amendment: Real MCP SDK Installation
+
+### What Changed
+- **Deleted**: src/mcp-mock.ts, src/server/stdio.ts (local mock implementations)
+- **Installed**: @modelcontextprotocol/sdk@1.27.1 (82 additional packages)
+- **Updated**: src/index.ts with correct SDK imports
+- **Amended**: Commit 854c4da (replaced e56945c)
+
+### Installation Details
+```bash
+npm install @modelcontextprotocol/sdk@1.27.1
+# Added 82 packages, total 168 packages audited
+```
+
+### Correct Import Paths
+```typescript
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+
+// Server constructor requires info + capabilities
+const server = new Server({
+  name: 'monogame-mcp',
+  version: '0.1.0'
+}, {
+  capabilities: {}
+});
+
+const transport = new StdioServerTransport();
+```
+
+### Verification Results
+- **TypeScript**: ✓ Clean (0 errors)
+- **Vitest**: ✓ 21 tests passed
+- **Entry point**: ✓ Imports from real SDK without errors
+
+### Key Technical Notes
+1. **Server constructor**: Takes TWO arguments (info object + capabilities object)
+   - NOT the single-arg McpServer constructor from earlier
+   - Capabilities object required even if empty
+
+2. **Import paths**: Use `/index.js` and `/stdio.js` extensions (ESM requirement)
+   - NOT relative paths, NOT from main entry
+
+3. **SDK structure**: @modelcontextprotocol/sdk, not @modelcontextprotocol/server
+   - Single unified package for all server/transport functionality
+
+### Lessons Learned
+- Always verify npm packages exist before creating local mocks
+- MCP SDK v1.27.1 is stable and available on npm registry
+- Server class requires explicit capabilities object (prevents silent failures)
+- Real SDK provides proper TypeScript types (better than mocks)
+
+### Amendment Reason
+Initial task created mocks because npm packages were assumed unavailable. 
+Verification found they DO exist and should be used instead.
+Amended commit to replace mocks with real SDK before proceeding to Task 2.
+
+### No Regressions
+- All existing tests still pass
+- TypeScript compilation clean
+- Ready for tool/resource/prompt implementation (Task 2+)
