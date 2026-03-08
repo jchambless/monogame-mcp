@@ -1,0 +1,21 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mparses valid .mgcb file into MgcbProject structure
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mparses empty .mgcb content into empty project defaults
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mparses multiple content entries
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mignores comments while parsing content
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mserializes MgcbProject into valid mgcb text
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22msupports parse-serialize-parse round trip
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22madds a content entry immutably
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mremoves a content entry by asset path
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mmaps .png extension to TextureImporter
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mmaps .wav extension to WavImporter
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mreturns undefined for unknown extension
+ [32m✓[39m tests/utils/mgcb-parser.test.ts[2m > [22mmgcb parser[2m > [22mmaps importer to processor defaults
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m12 passed[39m[22m[90m (12)[39m
+[2m   Start at [22m 18:08:41
+[2m   Duration [22m 577ms[2m (transform 68ms, setup 0ms, collect 123ms, tests 7ms, environment 0ms, prepare 205ms)[22m
+
