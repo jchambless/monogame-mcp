@@ -169,67 +169,6 @@ public class MusicManager
 }
 ```
 
-## Audio Controller with Pools
-
-```csharp
-public class AudioController
-{
-    private Dictionary<string, SoundEffect> _soundEffects;
-    private List<SoundEffectInstance> _activeInstances;
-    private const int MAX_INSTANCES = 32;
-    
-    public AudioController()
-    {
-        _soundEffects = new Dictionary<string, SoundEffect>();
-        _activeInstances = new List<SoundEffectInstance>();
-    }
-    
-    public void LoadSound(string name, SoundEffect sound)
-    {
-        _soundEffects[name] = sound;
-    }
-    
-    public void PlaySound(string name, float volume = 1.0f, float pitch = 0f, float pan = 0f)
-    {
-        if (!_soundEffects.ContainsKey(name))
-            return;
-        
-        // Clean up stopped instances
-        _activeInstances.RemoveAll(i => i.State == SoundState.Stopped);
-        
-        // Limit concurrent sounds
-        if (_activeInstances.Count >= MAX_INSTANCES)
-            _activeInstances[0].Stop();
-        
-        var instance = _soundEffects[name].CreateInstance();
-        instance.Volume = volume;
-        instance.Pitch = pitch;
-        instance.Pan = pan;
-        instance.Play();
-        
-        _activeInstances.Add(instance);
-    }
-    
-    public void StopAll()
-    {
-        foreach (var instance in _activeInstances)
-        {
-            instance.Stop();
-        }
-        _activeInstances.Clear();
-    }
-    
-    public void Dispose()
-    {
-        StopAll();
-        foreach (var instance in _activeInstances)
-        {
-            instance.Dispose();
-        }
-    }
-}
-```
-
 ## Source
 
 Based on MonoGame documentation: https://docs.monogame.net/articles/getting_to_know/whatis/audio/

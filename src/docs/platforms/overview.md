@@ -126,26 +126,9 @@ public Game1()
 ### Runtime Detection
 
 ```csharp
-if (OperatingSystem.IsWindows())
-{
-    // Windows-specific code
-}
-else if (OperatingSystem.IsLinux())
-{
-    // Linux-specific code
-}
-else if (OperatingSystem.IsMacOS())
-{
-    // macOS-specific code
-}
-else if (OperatingSystem.IsAndroid())
-{
-    // Android-specific code
-}
-else if (OperatingSystem.IsIOS())
-{
-    // iOS-specific code
-}
+if (OperatingSystem.IsWindows()) { }
+else if (OperatingSystem.IsMacOS()) { }
+else if (OperatingSystem.IsAndroid()) { }
 ```
 
 ## Input Considerations

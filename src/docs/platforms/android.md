@@ -126,35 +126,16 @@ protected override void Update(GameTime gameTime)
 
 ## Graphics
 
-### Screen Resolution
-
+Set resolution and orientation in Initialize():
 ```csharp
-protected override void Initialize()
-{
-    // Set resolution
-    _graphics.PreferredBackBufferWidth = 1920;
-    _graphics.PreferredBackBufferHeight = 1080;
-    _graphics.IsFullScreen = true;
-    _graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | 
-                                     DisplayOrientation.LandscapeRight;
-    _graphics.ApplyChanges();
-    
-    base.Initialize();
-}
+_graphics.PreferredBackBufferWidth = 1920;
+_graphics.PreferredBackBufferHeight = 1080;
+_graphics.IsFullScreen = true;
+_graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
+_graphics.ApplyChanges();
 ```
 
-### Orientation
-
-```csharp
-// In Activity1.cs
-[Activity(ScreenOrientation = ScreenOrientation.SensorLandscape)]
-
-// or Portrait
-[Activity(ScreenOrientation = ScreenOrientation.SensorPortrait)]
-
-// or Auto-rotate
-[Activity(ScreenOrientation = ScreenOrientation.Sensor)]
-```
+Activity orientation: `[Activity(ScreenOrientation = ScreenOrientation.SensorLandscape)]`
 
 ## Content Pipeline
 
@@ -235,40 +216,9 @@ GC.Collect();
 TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0);
 ```
 
-## Common Issues
-
-### App Crashes on Start
-
-Check `adb logcat` for errors:
-```bash
-adb logcat -s MonoGame
-```
-
-### Texture Loading Fails
-
-Ensure textures are power-of-two or use:
-```csharp
-_graphics.GraphicsProfile = GraphicsProfile.HiDef;
-```
-
-### Content Not Found
-
-Verify Build Action is `AndroidAsset` for `.xnb` files.
-
-### Touch Not Working
-
-Check touch panel is enabled:
-```csharp
-TouchPanel.EnabledGestures = GestureType.Tap | GestureType.FreeDrag;
-```
-
 ## Google Play Publishing
 
-1. Create signed release APK/AAB
-2. Create Google Play Developer account
-3. Upload AAB to Play Console
-4. Fill store listing
-5. Submit for review
+Create signed release APK/AAB, upload to Play Console, complete store listing, submit for review.
 
 ## Source
 

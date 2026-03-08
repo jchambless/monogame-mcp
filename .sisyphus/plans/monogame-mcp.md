@@ -233,7 +233,7 @@ Max Concurrent: 5 (Wave 2)
 
 ## TODOs
 
-- [ ] 1. Project Scaffold — package.json, tsconfig, vitest, .gitignore
+- [x] 1. Project Scaffold — package.json, tsconfig, vitest, .gitignore
 
   **What to do**:
   - Initialize npm project with `npm init -y`
@@ -337,7 +337,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `package.json, tsconfig.json, vitest.config.ts, .gitignore, src/index.ts, src/tools/, src/resources/, src/prompts/, src/docs/, src/utils/, tests/`
   - Pre-commit: `npx tsc --noEmit`
 
-- [ ] 2. Documentation Data Preparation — Curate MonoGame Markdown Docs
+- [x] 2. Documentation Data Preparation — Curate MonoGame Markdown Docs
 
   **What to do**:
   - Create bundled markdown documentation files in `src/docs/api/` for ~25 core MonoGame classes
@@ -481,7 +481,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/docs/**/*.md, src/docs/index.ts`
   - Pre-commit: `npx tsc --noEmit`
 
-- [ ] 3. Type Definitions & Shared Interfaces
+- [x] 3. Type Definitions & Shared Interfaces
 
   **What to do**:
   - Create `src/types.ts` with shared TypeScript types and interfaces used across the project:
@@ -568,7 +568,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/types.ts, tests/types.test.ts`
   - Pre-commit: `npx tsc --noEmit && npx vitest run`
 
-- [ ] 4. Subprocess Execution Utility with Security
+- [x] 4. Subprocess Execution Utility with Security
 
   **What to do**:
   - Create `src/utils/subprocess.ts` with a secure subprocess execution wrapper
@@ -683,7 +683,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/utils/subprocess.ts, tests/utils/subprocess.test.ts`
   - Pre-commit: `npx vitest run tests/utils/subprocess.test.ts`
 
-- [ ] 5. Documentation Search Engine — In-Memory Index
+- [x] 5. Documentation Search Engine — In-Memory Index
 
   **What to do**:
   - Create `src/utils/doc-search.ts` with an in-memory search engine over bundled markdown docs
@@ -784,7 +784,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/utils/doc-search.ts, tests/utils/doc-search.test.ts`
   - Pre-commit: `npx vitest run tests/utils/doc-search.test.ts`
 
-- [ ] 6. MGCB File Parser — Read/Write .mgcb Content Project Files
+- [x] 6. MGCB File Parser — Read/Write .mgcb Content Project Files
 
   **What to do**:
   - Create `src/utils/mgcb-parser.ts` with parser for MonoGame Content Builder (.mgcb) files
@@ -901,7 +901,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/utils/mgcb-parser.ts, tests/utils/mgcb-parser.test.ts`
   - Pre-commit: `npx vitest run tests/utils/mgcb-parser.test.ts`
 
-- [ ] 7. Code Scaffolding Templates
+- [x] 7. Code Scaffolding Templates
 
   **What to do**:
   - Create `src/utils/scaffolding.ts` with MonoGame code templates
@@ -993,7 +993,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/utils/scaffolding.ts, tests/utils/scaffolding.test.ts`
   - Pre-commit: `npx vitest run tests/utils/scaffolding.test.ts`
 
-- [ ] 8. Error Diagnosis Pattern Database
+- [x] 8. Error Diagnosis Pattern Database
 
   **What to do**:
   - Create `src/utils/error-diagnosis.ts` with MonoGame error pattern matching

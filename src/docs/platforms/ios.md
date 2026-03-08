@@ -248,49 +248,11 @@ Batch sprites efficiently on iOS due to GPU limitations.
 
 ## Common Issues
 
-### App Crashes on Device
+App crashes: Check Xcode Console. Touch not responding: Enable TouchPanel.EnabledGestures. Content not loading: Verify Build Action `BundleResource`. Memory warnings: Call Content.Unload() and GC.Collect().
 
-Check Xcode Console for crash logs.
+## App Store
 
-### Touch Not Responding
-
-```csharp
-// Enable touch in Initialize
-TouchPanel.EnabledGestures = GestureType.Tap;
-```
-
-### Content Not Loading
-
-Verify `.xnb` files have Build Action `BundleResource`.
-
-### Memory Warning
-
-```csharp
-public override void ReceiveMemoryWarning()
-{
-    base.ReceiveMemoryWarning();
-    Content.Unload();
-    GC.Collect();
-}
-```
-
-## App Store Guidelines
-
-- Support latest iOS version
-- Support all device orientations or justify limitation
-- Provide app icons for all required sizes
-- Include privacy policy for data collection
-- Handle App Store ratings/reviews
-
-## Testing Checklist
-
-- [ ] Test on multiple device sizes (iPhone SE, iPhone 14 Pro Max, iPad)
-- [ ] Test all orientations
-- [ ] Test with low memory conditions
-- [ ] Test interruptions (phone call, notification)
-- [ ] Test background/foreground transitions
-- [ ] Verify IAP (if applicable)
-- [ ] Check battery consumption
+Support latest iOS, all device orientations, required app icon sizes, and include privacy policy.
 
 ## Source
 

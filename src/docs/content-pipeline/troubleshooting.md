@@ -159,83 +159,21 @@ technique BasicEffect
 
 ## Platform-Specific Issues
 
-### iOS Build Errors
-
-**Error**: Assets not found on device
-
-**Cause**: Case-sensitive file system
-
-**Solution**: Ensure all paths match case exactly:
-```csharp
-// Wrong on iOS (if file is Player.png)
-Content.Load<Texture2D>("Textures/player");
-
-// Correct
-Content.Load<Texture2D>("Textures/Player");
-```
-
-### Android Build Errors
-
-**Error**: Content files not included in APK
-
-**Solution**: Set Build Action to `AndroidAsset` for `.xnb` files
+iOS: Ensure case-sensitive file paths match exactly (`Player.png` not `player.png`)
+Android: Set Build Action to `AndroidAsset` for `.xnb` files
 
 ## Performance Issues
 
-### Long Build Times
-
-**Solutions**:
-1. Enable compression only for release builds
-2. Use incremental builds (only rebuild changed assets)
-3. Reduce texture sizes
-4. Disable mipmap generation when not needed
-
-### Large File Sizes
-
-**Solutions**:
-
-1. Enable compression:
-```
-/compress:True
-```
-
-2. Use compressed texture formats:
-```
-/processorParam:TextureFormat=Dxt5
-```
-
-3. Reduce texture dimensions
-4. Use appropriate audio quality:
-```
-/processorParam:Quality=Medium
-```
+**Long Build Times**: Enable compression only for release, use incremental builds, reduce texture sizes
+**Large Files**: Enable compression (`/compress:True`), use DXT formats, reduce dimensions
 
 ## Debugging Tips
 
-### Enable Verbose Output
+Enable verbose output: `dotnet mgcb Content.mgcb /quiet:False`
+Check intermediate files in `obj/Platform/Content/`
+Manual rebuild: `dotnet mgcb Content.mgcb /rebuild`
 
-```bash
-dotnet mgcb Content.mgcb /quiet:False
-```
-
-### Check Intermediate Files
-
-Look in `obj/Platform/Content/` for intermediate build files to debug importer issues.
-
-### Manual Content Build
-
-```bash
-# Build specific file
-dotnet mgcb Content.mgcb /rebuild Textures/player.png
-
-# Clean all content
-dotnet mgcb Content.mgcb /clean
-
-# Full rebuild
-dotnet mgcb Content.mgcb /rebuild
-```
-
-### Verify Content Type
+## Common Cache Issues
 
 ```csharp
 try
@@ -262,11 +200,10 @@ catch (ContentLoadException ex)
 ### Missing Content After Deployment
 
 **Checklist**:
-- [ ] All `.xnb` files copied to output directory
-- [ ] `Content.RootDirectory` set correctly
-- [ ] Content folder structure preserved
-- [ ] Platform-specific content built for target platform
+- All `.xnb` files copied to output
+- `Content.RootDirectory` set correctly
+- Content folder structure preserved
 
 ## Source
 
-Based on MonoGame community troubleshooting guides and documentation.
+Based on MonoGame community troubleshooting guides.

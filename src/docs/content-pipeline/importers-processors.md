@@ -3,7 +3,6 @@
 Importers read source files, and processors convert imported data into game-ready formats.
 
 ## Pipeline Architecture
-
 ```
 Source File → Importer → Intermediate Object → Processor → .xnb File
 ```
@@ -11,21 +10,18 @@ Source File → Importer → Intermediate Object → Processor → .xnb File
 ## Built-in Importers
 
 ### TextureImporter
-
 **Input**: `.png`, `.jpg`, `.bmp`, `.gif`, `.tga`, `.dds`  
 **Output**: `TextureContent`
 
 Imports 2D texture images.
 
 ### WavImporter
-
 **Input**: `.wav`  
 **Output**: `AudioFileContent`
 
 Imports uncompressed WAV audio files.
 
 ### Mp3Importer / OggImporter / WmaImporter
-
 **Input**: `.mp3`, `.ogg`, `.wma`  
 **Output**: `AudioFileContent`
 
@@ -132,21 +128,7 @@ Processes audio files for streaming music playback. No parameters.
 
 **Parameters**:
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| ColorKeyColor | Color | 255,0,255,255 | Transparent color for textures |
-| ColorKeyEnabled | bool | true | Enable color key |
-| GenerateMipmaps | bool | true | Generate mipmaps |
-| GenerateTangentFrames | bool | false | Generate tangent frames |
-| PremultiplyTextureAlpha | bool | true | Premultiply alpha |
-| PremultiplyVertexColors | bool | true | Premultiply vertex colors |
-| ResizeTexturesToPowerOfTwo | bool | false | Resize textures |
-| RotationX | float | 0 | Rotate model (degrees) |
-| RotationY | float | 0 | Rotate model (degrees) |
-| RotationZ | float | 0 | Rotate model (degrees) |
-| Scale | float | 1 | Scale model |
-| SwapWindingOrder | bool | false | Reverse face winding |
-| TextureFormat | TextureProcessorOutputFormat | Compressed | Output format |
+Common parameters: ColorKeyColor, ColorKeyEnabled, GenerateMipmaps, PremultiplyTextureAlpha, TextureFormat, RotationX/Y/Z, Scale.
 
 ## Custom Content Processors
 

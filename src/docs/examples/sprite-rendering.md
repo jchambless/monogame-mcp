@@ -29,15 +29,14 @@ protected override void Draw(GameTime gameTime)
     // Draw with rotation and scale
     _spriteBatch.Draw(
         _playerTexture,
-        _position,                              // Position
-        null,                                   // Source rectangle (null = entire texture)
-        Color.White,                            // Tint color
-        _rotation,                              // Rotation in radians
-        new Vector2(_playerTexture.Width / 2,   // Origin (center of sprite)
-                    _playerTexture.Height / 2),
-        _scale,                                 // Scale
-        SpriteEffects.None,                     // Flip effects
-        0f                                      // Layer depth
+        _position,
+        null,
+        Color.White,
+        _rotation,
+        new Vector2(_playerTexture.Width / 2, _playerTexture.Height / 2),
+        _scale,
+        SpriteEffects.None,
+        0f
     );
     
     _spriteBatch.End();
