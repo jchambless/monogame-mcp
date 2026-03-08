@@ -1520,7 +1520,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/scaffold-code.ts, tests/tools/scaffold-code.test.ts`
   - Pre-commit: `npx vitest run tests/tools/scaffold-code.test.ts`
 
-- [ ] 13. Tool — Project Creation (dotnet new)
+- [x] 13. Tool — Project Creation (dotnet new)
 
   **What to do**:
   - Create `src/tools/create-project.ts` with the project creation tool
@@ -1625,7 +1625,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/create-project.ts, tests/tools/create-project.test.ts`
   - Pre-commit: `npx vitest run tests/tools/create-project.test.ts`
 
-- [ ] 14. Tool — Content Pipeline Management (add/remove/configure assets in .mgcb)
+- [x] 14. Tool — Content Pipeline Management (add/remove/configure assets in .mgcb)
 
   **What to do**:
   - Create `src/tools/manage-content.ts` with the content pipeline management tool
@@ -1735,7 +1735,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/manage-content.ts, tests/tools/manage-content.test.ts`
   - Pre-commit: `npx vitest run tests/tools/manage-content.test.ts`
 
-- [ ] 15. Tool — Content Building (mgcb build)
+- [x] 15. Tool — Content Building (mgcb build)
 
   **What to do**:
   - Create `src/tools/build-content.ts` with the content building tool
@@ -1841,7 +1841,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/build-content.ts, tests/tools/build-content.test.ts`
   - Pre-commit: `npx vitest run tests/tools/build-content.test.ts`
 
-- [ ] 16. Tool — Build and Run Project (dotnet build/run)
+- [x] 16. Tool — Build and Run Project (dotnet build/run)
 
   **What to do**:
   - Create `src/tools/build-run.ts` with the build and run tool
