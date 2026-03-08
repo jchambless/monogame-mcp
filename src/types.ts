@@ -46,13 +46,21 @@ export interface DocSearchResult {
  * Tool result interface aligned with MCP SDK's CallToolResult.
  * Used as the return type for MCP tools.
  */
+export interface TextContent {
+  type: 'text';
+  text: string;
+}
+
+export interface ImageContent {
+  type: 'image';
+  data: string;
+  mimeType: string;
+}
+
+export type ContentBlock = TextContent | ImageContent;
+
 export interface ToolResult {
-  content: Array<{
-    type: 'text' | 'image' | 'audio';
-    text?: string;
-    data?: string;
-    mimeType?: string;
-  }>;
+  content: ContentBlock[];
   isError?: boolean;
 }
 

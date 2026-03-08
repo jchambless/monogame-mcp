@@ -1,0 +1,40 @@
+{
+  "type": "module",
+  "name": "monogame-mcp",
+  "version": "0.1.0",
+  "description": "MonoGame Model Context Protocol server for AI tools",
+  "bin": {
+    "monogame-mcp": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "docs"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "monogame",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
