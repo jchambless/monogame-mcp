@@ -1,0 +1,70 @@
+TASK 19: npm PACKAGING — EVIDENCE FILE
+
+GENERATED: 2026-03-08
+
+=== UPDATED package.json ===
+
+{
+  "type": "module",
+  "name": "monogame-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for MonoGame game framework — AI-powered documentation, project management, and code generation",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "bin": {
+    "monogame-mcp": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "src/docs"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test:run"
+  },
+  "keywords": [
+    "monogame",
+    "mcp",
+    "game-development",
+    "xna",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "PLACEHOLDER - UPDATE IF REPO EXISTS"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
+
+=== KEY UPDATES ===
+✓ Added "types": "./build/index.d.ts" for TypeScript consumers
+✓ Updated "files" to include "src/docs" (markdown documentation)
+✓ Added "prepublishOnly" script for safety checks before publishing
+✓ Updated keywords: monogame, mcp, game-development, xna, ai
+✓ Added repository field (placeholder for git URL)
+✓ Normalized engines to ">=18" (cleaner format)
+✓ Enhanced description with clear value proposition
+
+=== VERIFICATION ===
+✓ All required fields present (main, types, bin, files, scripts, engines, license)
+✓ bin entry correctly points to ./build/index.js
+✓ files field includes only build/ and src/docs/
+✓ Node >=18 requirement enforced
