@@ -129,130 +129,58 @@ protected override void Update(GameTime gameTime)
 ### Accelerometer
 
 ```csharp
-Vector3 acceleration = Accelerometer.GetState().Acceleration;
-_tiltAngle = acceleration.X * MathHelper.PiOver4;
+Vector3 accel = Accelerometer.GetState().Acceleration;
+_tiltAngle = accel.X * MathHelper.PiOver4;
 ```
 
 ## Graphics
 
-### Resolution and Orientation
-
 ```csharp
-protected override void Initialize()
-{
-    // Native resolution (Retina)
-    _graphics.PreferredBackBufferWidth = 2048;
-    _graphics.PreferredBackBufferHeight = 1536;
-    
-    // Landscape
-    _graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | 
-                                     DisplayOrientation.LandscapeRight;
-    
-    _graphics.IsFullScreen = true;
-    _graphics.ApplyChanges();
-    
-    base.Initialize();
-}
+// Resolution and orientation
+_graphics.PreferredBackBufferWidth = 2048;
+_graphics.PreferredBackBufferHeight = 1536;
+_graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | 
+                                 DisplayOrientation.LandscapeRight;
+_graphics.IsFullScreen = true;
+_graphics.ApplyChanges();
 ```
 
-### Safe Area (iPhone X+ Notch)
-
+Safe area for notch:
 ```csharp
 #if IOS
 Rectangle safeArea = UIKit.UIApplication.SharedApplication.KeyWindow.SafeAreaInsets;
-// Adjust UI positioning to avoid notch
 #endif
 ```
 
 ## Content Pipeline
 
-Build content for iOS:
-
 ```
 /platform:iOS
 /profile:Reach
-```
-
-**Texture Format**: Use `Pvrtc` or `Color`:
-
-```
 /processorParam:TextureFormat=Pvrtc
 ```
 
 ## Deployment
 
-### Debug on Device
+Debug: Connect device via USB, trust computer, select device in Visual Studio, build and run.
 
-1. Connect iPhone/iPad via USB
-2. Trust computer on device
-3. In Visual Studio, select device as target
-4. Build and run
-
-### App Store Deployment
-
-1. Archive build:
+App Store:
 ```bash
 dotnet publish -c Release -f net8.0-ios
 ```
+Upload via Xcode/Transporter, submit for review.
 
-2. Create App Store Connect listing
-3. Upload via Xcode or Transporter
-4. Submit for review
+Provisioning: Development (test devices), Ad Hoc (specific devices), App Store (distribution).
 
-### Provisioning Profiles
+## Performance
 
-Required for device testing and distribution:
-
-1. Development: Test on your devices
-2. Ad Hoc: Test on specific devices
-3. App Store: Distribute via App Store
-
-## Performance Optimization
-
-### Texture Compression
-
-Use PVRTC for best iOS performance:
-```
-/processorParam:TextureFormat=PvrtcRgb4Bpp
-```
-
-### Memory Management
-
-iOS has strict memory limits:
-
-```csharp
-// Unload content between levels
-Content.Unload();
-
-// Monitor memory in Update
-if (GC.GetTotalMemory(false) > 100_000_000) // 100 MB
-{
-    Content.Unload();
-    GC.Collect();
-}
-```
-
-### Frame Rate
-
-```csharp
-// Target 60 FPS
-TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0);
-
-// Or 30 FPS for better battery
-TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 30.0);
-```
-
-### Reduce Draw Calls
-
-Batch sprites efficiently on iOS due to GPU limitations.
+Use PVRTC compression, unload content between levels, target 60 FPS (or 30 for battery), batch sprites efficiently.
 
 ## Common Issues
 
-App crashes: Check Xcode Console. Touch not responding: Enable TouchPanel.EnabledGestures. Content not loading: Verify Build Action `BundleResource`. Memory warnings: Call Content.Unload() and GC.Collect().
+App crashes: Check Xcode Console. Touch not responding: Enable TouchPanel gestures. Content not loading: Verify Build Action `BundleResource`. Memory warnings: Call Content.Unload().
 
-## App Store
-
-Support latest iOS, all device orientations, required app icon sizes, and include privacy policy.
+App Store: Support latest iOS, all orientations, include required icon sizes and privacy policy.
 
 ## Source
 

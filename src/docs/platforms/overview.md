@@ -107,27 +107,17 @@ dotnet new classlib -n MyGame.Core
 
 ## Platform-Specific Code
 
-### Conditional Compilation
-
 ```csharp
-public Game1()
-{
-    _graphics = new GraphicsDeviceManager(this);
-    
-    #if WINDOWS
-    _graphics.PreferredBackBufferWidth = 1920;
-    _graphics.PreferredBackBufferHeight = 1080;
-    #elif ANDROID || IOS
-    _graphics.IsFullScreen = true;
-    #endif
-}
-```
+// Conditional compilation
+#if WINDOWS
+_graphics.PreferredBackBufferWidth = 1920;
+_graphics.PreferredBackBufferHeight = 1080;
+#elif ANDROID || IOS
+_graphics.IsFullScreen = true;
+#endif
 
-### Runtime Detection
-
-```csharp
+// Runtime detection
 if (OperatingSystem.IsWindows()) { }
-else if (OperatingSystem.IsMacOS()) { }
 else if (OperatingSystem.IsAndroid()) { }
 ```
 
@@ -139,77 +129,32 @@ else if (OperatingSystem.IsAndroid()) { }
 | Mouse | ✓ | ✗ | ✗ |
 | Touch | ✗ | ✓ | ✓ |
 | Gamepad | ✓ | ✓ | ✓ |
-| Accelerometer | ✗ | ✓ | ✓ |
 
-### Unified Input System
+Unified input system: Desktop uses keyboard/gamepad, mobile uses touch. Normalize movement vectors. Use `#if` directives for platform-specific code.
 
-```csharp
-public Vector2 GetMovementInput()
-{
-    Vector2 movement = Vector2.Zero;
-    
-    // Desktop: Keyboard/Gamepad
-    #if !ANDROID && !IOS
-    KeyboardState keyState = Keyboard.GetState();
-    if (keyState.IsKeyDown(Keys.W)) movement.Y -= 1;
-    if (keyState.IsKeyDown(Keys.S)) movement.Y += 1;
-    if (keyState.IsKeyDown(Keys.A)) movement.X -= 1;
-    if (keyState.IsKeyDown(Keys.D)) movement.X += 1;
-    
-    GamePadState padState = GamePad.GetState(PlayerIndex.One);
-    if (padState.IsConnected)
-        movement = padState.ThumbSticks.Left;
-    #endif
-    
-    // Mobile: Touch
-    #if ANDROID || IOS
-    TouchCollection touches = TouchPanel.GetState();
-    if (touches.Count > 0)
-    {
-        // Virtual joystick logic
-        movement = CalculateVirtualJoystick(touches[0].Position);
-    }
-    #endif
-    
-    if (movement != Vector2.Zero)
-        movement.Normalize();
-    
-    return movement;
-}
-```
-
-## Content Pipeline Considerations
+## Content Pipeline
 
 Different platforms support different texture formats:
 
-```xml
-<!-- Desktop (OpenGL) -->
-<ProcessorParam Name="TextureFormat">Color</ProcessorParam>
-
-<!-- Windows DX -->
-<ProcessorParam Name="TextureFormat">Dxt5</ProcessorParam>
-
-<!-- Android -->
-<ProcessorParam Name="TextureFormat">Etc1</ProcessorParam>
-
-<!-- iOS -->
-<ProcessorParam Name="TextureFormat">PvrtcRgb4Bpp</ProcessorParam>
-```
+- **Desktop (OpenGL)**: Color
+- **Windows DX**: Dxt5
+- **Android**: Etc1
+- **iOS**: PvrtcRgb4Bpp
 
 ## Testing Strategy
 
-1. **Primary Platform**: Develop on your main target (usually DesktopGL)
-2. **Regular Testing**: Test on all platforms weekly
-3. **Platform-Specific**: Test input/performance on actual devices
-4. **Pre-Release**: Thorough testing on all targets before release
+1. Develop on primary platform (usually DesktopGL)
+2. Test on all platforms weekly
+3. Test input/performance on actual devices
+4. Thorough testing on all targets before release
 
-## Distribution Platforms
+## Distribution
 
 | Platform | Stores |
 |----------|--------|
 | DesktopGL | Steam, itch.io, GOG, Epic Games Store |
-| WindowsDX | Microsoft Store, Steam, itch.io |
-| Android | Google Play Store, Amazon Appstore |
+| WindowsDX | Microsoft Store, Steam |
+| Android | Google Play, Amazon Appstore |
 | iOS | Apple App Store |
 
 ## Source
