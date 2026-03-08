@@ -1,0 +1,16 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22msearches SpriteBatch and returns it as top result
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22msearches draw sprite and returns SpriteBatch and sprite-rendering docs
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22mfilters search results by namespace
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22mreturns empty array for empty and non-matching queries
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22mgets class by exact class name lookup (case-insensitive)
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22mreturns all docs in examples category
+ [32m✓[39m tests/utils/doc-search.test.ts[2m > [22mDocSearchEngine[2m > [22mloads markdown content lazily and caches file contents across searches
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m7 passed[39m[22m[90m (7)[39m
+[2m   Start at [22m 18:01:57
+[2m   Duration [22m 769ms[2m (transform 97ms, setup 0ms, collect 198ms, tests 61ms, environment 0ms, prepare 243ms)[22m
+
