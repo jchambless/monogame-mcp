@@ -1,0 +1,26 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate game-class with default parameters
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate game-class with custom className and namespace
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate input-handler with keyboard state tracking
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate drawable-component with SpriteBatch
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate collision-helper with AABB and circle methods
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate sprite-animation with frame management
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate scene-manager with state management
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mTemplate Generation[2m > [22mshould generate audio-manager with sound and music support
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mList Templates Mode[2m > [22mshould return markdown list of all 8 templates when listTemplates is true
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mList Templates Mode[2m > [22mshould include template descriptions in list
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mError Handling[2m > [22mshould return error for invalid template name
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mError Handling[2m > [22mshould return error for missing required template parameter
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mError Handling[2m > [22mshould handle empty className gracefully with defaults
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mParameter Substitution[2m > [22mshould substitute all placeholder occurrences in template
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mParameter Substitution[2m > [22mshould use default namespace when not provided
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mOutput Format[2m > [22mshould include filename comment at start of generated code
+ [32m✓[39m tests/tools/scaffold-code.test.ts[2m > [22mCode Scaffolding Tool[2m > [22mOutput Format[2m > [22mshould preserve C# code formatting and indentation
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m17 passed[39m[22m[90m (17)[39m
+[2m   Start at [22m 18:30:18
+[2m   Duration [22m 588ms[2m (transform 79ms, setup 0ms, collect 193ms, tests 9ms, environment 0ms, prepare 162ms)[22m
+

@@ -1,0 +1,17 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mKnown Errors[2m > [22mshould diagnose content file not found error
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mKnown Errors[2m > [22mshould diagnose SpriteBatch Begin/Draw lifecycle error
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mKnown Errors[2m > [22mshould include context in diagnosis when provided
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mUnknown Errors[2m > [22mshould provide general troubleshooting for unknown errors
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mUnknown Errors[2m > [22mshould include context in unknown error response
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mInput Validation[2m > [22mshould reject empty error message
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mInput Validation[2m > [22mshould reject missing error message
+ [32m✓[39m tests/tools/diagnose-error.test.ts[2m > [22mError Diagnosis Tool[2m > [22mInput Validation[2m > [22mshould accept valid error message without context
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m8 passed[39m[22m[90m (8)[39m
+[2m   Start at [22m 18:28:38
+[2m   Duration [22m 626ms[2m (transform 84ms, setup 1ms, collect 207ms, tests 7ms, environment 0ms, prepare 199ms)[22m
+

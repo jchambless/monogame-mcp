@@ -1,0 +1,16 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22mexports tool metadata for monogame_api_lookup
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22msearch SpriteBatch returns class doc with namespace and methods
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22msearch draw returns multiple ranked results including SpriteBatch and Sprite Rendering
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22mnamespace filter returns only docs from that namespace
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22mcategory filter returns only docs from requested category
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22mreturns helpful message when no docs match query
+ [32m✓[39m tests/tools/api-lookup.test.ts[2m > [22mAPI Lookup Tool[2m > [22mreturns validation error for empty query
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m7 passed[39m[22m[90m (7)[39m
+[2m   Start at [22m 18:30:04
+[2m   Duration [22m 665ms[2m (transform 87ms, setup 0ms, collect 231ms, tests 23ms, environment 0ms, prepare 183ms)[22m
+

@@ -1,0 +1,14 @@
+file:///C:/Projects/monogame-mcp/node_modules/vitest/dist/vendor/cac.cdAtVkJZ.js:403
+          throw new CACError(`Unknown option \`${name.length > 1 ? `--${name}` : `-${name}`}\``);
+                ^
+
+CACError: Unknown option `--grep`
+    at Command.checkUnknownOptions (file:///C:/Projects/monogame-mcp/node_modules/vitest/dist/vendor/cac.cdAtVkJZ.js:403:17)
+    at CAC.runMatchedCommand (file:///C:/Projects/monogame-mcp/node_modules/vitest/dist/vendor/cac.cdAtVkJZ.js:603:13)
+    at CAC.parse (file:///C:/Projects/monogame-mcp/node_modules/vitest/dist/vendor/cac.cdAtVkJZ.js:544:12)
+    at file:///C:/Projects/monogame-mcp/node_modules/vitest/dist/cli.js:9:13
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async main (file:///C:/Projects/monogame-mcp/node_modules/vitest/dist/cli-wrapper.js:45:5)
+
+Node.js v22.12.0
