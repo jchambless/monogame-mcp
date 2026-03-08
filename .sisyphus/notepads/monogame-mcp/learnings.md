@@ -610,3 +610,134 @@ Prioritized by MonoGame developer pain points (from documentation research):
 - Ready for Task 11 (diagnose-error tool implementation) ✓
 - Pattern database can be extended without breaking existing code ✓
 
+
+---
+
+## [2026-03-08 18:19] Task 9: Core MCP Server Setup — McpServer, StdioServerTransport, Entry Point
+
+### Execution Summary
+- **TDD approach**: Tests written FIRST, then implementation (6 integration tests)
+- **All tests passing**: 6/6 ✓
+- **TypeScript compilation**: Clean (0 errors) ✓
+- **No console.log usage**: All logging via console.error() ✓
+- **Shebang present**: `#!/usr/bin/env node` verified ✓
+
+### Key Achievements
+
+1. **Factory Pattern Implementation**:
+   - `createServer()` function in `src/server.ts` returns configured Server instance
+   - Does NOT connect transport (enables testing flexibility)
+   - Allows InMemoryTransport testing without process spawning
+   - Separation of concern: factory creates, entry point connects
+
+2. **Test Infrastructure (TDD)**:
+   - 6 integration tests using InMemoryTransport.createLinkedPair()
+   - Tests verify: initialization, capabilities response, list methods (tools/resources/prompts)
+   - Raw JSON-RPC protocol messages for testing (not high-level client API)
+   - All tests verify empty arrays (tool/resource/prompt registration deferred to Tasks 10-16)
+
+3. **MCP SDK Learnings**:
+   - **Import paths**: Must use `.js` extensions (ESM requirement) for all imports
+   - **Server constructor**: Takes TWO arguments: `new Server(info, capabilities)`
+   - **Request handlers**: Use schema objects (e.g., `ListToolsRequestSchema`) not strings
+   - **Request schemas available**: `ListToolsRequestSchema`, `ListResourcesRequestSchema`, `ListPromptsRequestSchema` from `@modelcontextprotocol/sdk/types.js`
+
+4. **Entry Point Pattern**:
+   - `src/index.ts` calls `createServer()`, then creates `StdioServerTransport`
+   - Calls `await server.connect(transport)` to start listening
+   - Error handling with `console.error()` only (no `console.log()`)
+   - Async main() function to handle connection lifecycle
+
+### Protocol Handler Registration
+
+```typescript
+// Import request schemas from SDK
+import { ListToolsRequestSchema, ListResourcesRequestSchema, ListPromptsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
+
+// Register handlers using schema objects (not strings)
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: []
+}));
+
+server.setRequestHandler(ListResourcesRequestSchema, async () => ({
+  resources: []
+}));
+
+server.setRequestHandler(ListPromptsRequestSchema, async () => ({
+  prompts: []
+}));
+```
+
+### Testing Pattern (InMemoryTransport)
+
+```typescript
+// Create linked pair for in-memory communication
+const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+
+// Connect server
+await server.connect(serverTransport);
+
+// Send raw JSON-RPC messages
+clientTransport.send({
+  jsonrpc: '2.0',
+  id: 1,
+  method: 'initialize',
+  params: { ... }
+});
+
+// Listen for responses
+clientTransport.onmessage = (message) => {
+  // Handle response
+};
+```
+
+### Critical Decisions Made
+
+1. **Factory over static constructor**: Enabled testing with InMemoryTransport, avoided singleton pattern
+2. **Raw protocol testing**: Used JSON-RPC messages directly instead of high-level Client API (more realistic)
+3. **Empty list responses**: Intentionally returning empty arrays — actual tool/resource/prompt implementations in Tasks 10-16
+4. **No console.log() anywhere**: Strict adherence to MCP stdio protocol integrity (JSON-RPC corruption risk)
+
+### Files Created/Modified
+
+- **Created**: `src/server.ts` (factory function + request handlers)
+- **Created**: `tests/server.test.ts` (6 integration tests)
+- **Modified**: `src/index.ts` (uses factory, connects transport, error handling)
+
+### Evidence Files Generated
+
+1. `task-9-server-init.txt`: Full vitest output (6/6 tests passing)
+2. `task-9-no-console-log.txt`: Verification of no console.log usage
+3. `task-9-shebang.txt`: Verification of shebang line
+4. `task-9-tsc-compile.txt`: TypeScript compilation results (0 errors)
+
+### Integration Notes
+
+- **Blocks downstream**: Tasks 10-18 depend on Task 9 server infrastructure
+- **Uses from Tasks 1-8**: Server class and transport from MCP SDK, types from Task 3 (available but not used yet)
+- **Enables**: Tool implementations (Task 10-12), resource implementations (Task 13-14), prompt implementations (Task 15)
+- **Protocol ready**: Server responds correctly to `initialize`, `tools/list`, `resources/list`, `prompts/list` (MCP spec compliant)
+
+### Gotchas Encountered & Resolved
+
+1. **Import path error**: First tried `@modelcontextprotocol/sdk/types.js` for InMemoryTransport — actually in `inMemory.js` ✓ Resolved
+2. **Request handler signature**: Initially tried `server.setRequestHandler('tools/list', ...)` with string — needs schema object (e.g., `ListToolsRequestSchema`) ✓ Resolved
+3. **Client.initialize() method**: Client doesn't have `.initialize()` method — it's automatic on connection. Used raw JSON-RPC messages instead ✓ Resolved
+4. **Response async delays**: Tests needed `await new Promise(resolve => setTimeout(...))` to wait for in-memory transport messages ✓ Pattern established for future tests
+
+### Lessons Learned
+
+1. **MCP Protocol Deep Dive**: Understanding low-level JSON-RPC messages essential for testing (can't always rely on high-level APIs)
+2. **Factory Pattern Value**: Testability of server without process spawning — critical for integration tests
+3. **Schema Objects Over Strings**: MCP SDK's type-safe approach (schema objects for handlers) is stronger than string-based routing
+4. **stdio Protocol Fragility**: Any `console.log()` breaks the protocol — strict discipline required across codebase
+5. **Empty Implementations First**: Starting with empty list responses forces clear separation between server infrastructure and tool/resource/prompt implementations
+
+### No Blockers
+
+- All tests passing ✓
+- TypeScript compilation clean ✓
+- Server responds to all expected MCP protocol messages ✓
+- Factory pattern enables future testing and flexibility ✓
+- Ready for Wave 3 parallel tasks (Tasks 10-12) ✓
+

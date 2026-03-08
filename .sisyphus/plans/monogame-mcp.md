@@ -1096,7 +1096,7 @@ Max Concurrent: 5 (Wave 2)
   - Message: `feat(utils): add MonoGame error diagnosis pattern database`
   - Files: `src/utils/error-diagnosis.ts, tests/utils/error-diagnosis.test.ts`
 
-- [ ] 9. Core MCP Server Setup — McpServer, StdioServerTransport, Entry Point
+- [x] 9. Core MCP Server Setup — McpServer, StdioServerTransport, Entry Point
 
   **What to do**:
   - Create the main MCP server in `src/index.ts` (update the minimal stub from Task 1)
