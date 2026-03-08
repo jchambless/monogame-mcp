@@ -1,0 +1,38 @@
+# Test files
+tests/
+*.test.ts
+*.test.js
+vitest.config.ts
+
+# Configuration files
+tsconfig.json
+.prettierrc
+.eslintrc
+
+# Development files
+.sisyphus/
+.git/
+.gitignore
+
+# Documentation source (keep compiled docs)
+src/**/*.ts
+!src/docs/
+!src/docs/**/*.md
+
+# Node modules (not needed in package)
+node_modules/
+
+# Build artifacts to exclude
+dist/
+*.tgz
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
