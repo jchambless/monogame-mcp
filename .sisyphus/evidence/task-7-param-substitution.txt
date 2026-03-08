@@ -1,0 +1,6 @@
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould substitute all template parameters correctly
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould throw error for unknown template
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mlistTemplates[2m > [22mshould return all 8 templates
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mlistTemplates[2m > [22mshould include template metadata
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mlistTemplates[2m > [22mshould include all required templates
+

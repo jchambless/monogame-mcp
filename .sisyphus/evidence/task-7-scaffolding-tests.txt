@@ -1,0 +1,22 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate game-class template with correct structure
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate drawable-component template
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate game-component template
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate input-handler template with state tracking
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate sprite-animation template with frame management
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate scene-manager template with push/pop pattern
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate collision-helper template with AABB and circle detection
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould generate audio-manager template with SoundEffect and Song
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould substitute all template parameters correctly
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mgenerateCode[2m > [22mshould throw error for unknown template
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mlistTemplates[2m > [22mshould return all 8 templates
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mlistTemplates[2m > [22mshould include template metadata
+ [32m✓[39m tests/utils/scaffolding.test.ts[2m > [22mscaffolding[2m > [22mlistTemplates[2m > [22mshould include all required templates
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+[2m   Start at [22m 18:09:28
+[2m   Duration [22m 716ms[2m (transform 117ms, setup 0ms, collect 162ms, tests 10ms, environment 0ms, prepare 287ms)[22m
+
