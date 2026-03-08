@@ -1,0 +1,31 @@
+=== Prompt Content Validation ===
+
+Verifying MonoGame knowledge in system messages:
+
+            text: `# MonoGame Code Review Guidelines
+
+You are reviewing MonoGame C# game code for best practices and common issues.
+
+**Check for:**
+- **SpriteBatch lifecycle**: Begin() must be called before any Draw() calls, End() after all draws
+--
+            text: `# MonoGame Error Troubleshooting Guide
+
+You are troubleshooting a MonoGame error. Use this systematic diagnostic approach:
+
+**1. Check Content Pipeline**
+- Verify Content.RootDirectory is set (default: "Content")
+--
+            text: `# MonoGame Architecture Planning Guide
+
+You are planning MonoGame game architecture. Apply these architectural patterns:
+
+**1. Game Class Structure**
+- Extend \`Game\` base class for main game loop
+--
+            text: `# MonoGame Feature Implementation Guide
+
+You are implementing a MonoGame feature. Follow the game loop lifecycle and best practices:
+
+**Game Loop Lifecycle (execution order):**
+1. **Constructor**: Create game instance, set up GraphicsDeviceManager

@@ -1,0 +1,4 @@
+src/prompts/index.ts(20,5): error TS2353: Object literal may only specify known properties, and 'method' does not exist in type 'AnyObjectSchema'.
+src/prompts/index.ts(71,5): error TS2353: Object literal may only specify known properties, and 'method' does not exist in type 'AnyObjectSchema'.
+src/prompts/index.ts(134,5): error TS2353: Object literal may only specify known properties, and 'method' does not exist in type 'AnyObjectSchema'.
+src/prompts/index.ts(211,5): error TS2353: Object literal may only specify known properties, and 'method' does not exist in type 'AnyObjectSchema'.

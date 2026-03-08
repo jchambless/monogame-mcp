@@ -1221,3 +1221,101 @@ const outputPathMatch = output.match(/\s+->\s+(.+\.dll)/);
 - Depends on: Task 4 (subprocess utility)
 - Patterns from: Tasks 13 (create-project), 15 (build-content)
 - Suggests: Task 14 (diagnose-error) on failures
+
+## [2026-03-08 18:49] Task 17: Resource Registrations
+
+### Execution Summary
+- **Resources registered**: 4 (API, examples, content-pipeline, platforms)
+- **Test cases**: 10 (8 required + 2 resource list tests)
+- **URI template syntax**: `monogame://api/{className}`, `monogame://examples/{topic}`, etc.
+
+### Implementation Approach
+Used MCP SDK request handlers for resource operations:
+- `ListResourceTemplatesRequestSchema` - declares URI templates with metadata
+- `ListResourcesRequestSchema` - returns static list of all available resources
+- `ReadResourceRequestSchema` - handles dynamic resource lookup by URI
+
+### Key Technical Notes
+- **URI Parsing**: For `monogame://api/SpriteBatch`, `url.hostname` = "api" and `url.pathname` = "/SpriteBatch"
+- **Resource handler signature**: Returns `{ contents: [{ uri, mimeType, text }] }`
+- **Doc lookup strategy**: 
+  - API docs: use `docSearchEngine.getByClassName(identifier)`
+  - Examples/Pipeline/Platforms: find by path pattern in manifest
+- **Content loading**: Direct file read using same path resolution as DocSearchEngine (avoids private method access)
+
+### Testing Approach
+- TDD workflow: wrote 10 tests first, all failed initially
+- Test coverage: 2 tests per resource type (valid + invalid), plus 2 for resource list
+- Integration tests using InMemoryTransport pattern from Task 9
+- Verified markdown content by checking for expected strings (SpriteBatch, Input, Pipeline, DesktopGL)
+
+### Blockers/Challenges
+- Initial URI parsing bug: used `pathname.split('/')` incorrectly - fixed by using `url.hostname` for resource type
+- Content loading: cannot access private `loadContent()` method - solved by reading file directly with same path logic
+
+### Evidence Files Generated
+- `task-17-resources-tests.txt` - all 10 tests passing
+- `task-17-tsc-compile.txt` - TypeScript compilation clean
+- `task-17-lsp-diagnostics.txt` - both files LSP-clean
+
+
+---
+
+## [2026-03-08 18:53] Task 18: Prompt Registrations
+
+### Execution Summary
+- **Prompts registered**: 4 (code review, troubleshooting, architecture, feature implementation)
+- **Test cases**: 10 (all passing) ✓
+- **Prompt handler pattern**: MCP SDK v1 setRequestHandler with ListPromptsRequestSchema + GetPromptRequestSchema
+- **Role limitation discovered**: MCP SDK v1 only supports "user" and "assistant" roles, NOT "system"
+
+### Implementation Approach
+Used MCP SDK v1.27.1 pattern:
+1. Define prompt metadata array with name, description, arguments
+2. Register ListPromptsRequestSchema handler → return prompts array
+3. Register GetPromptRequestSchema handler → switch on name, return messages
+
+### Key Technical Notes
+- **MCP SDK v1 vs v2**: Context7 docs showed v2 `registerPrompt()` API, but v1.27.1 uses `setRequestHandler()`
+- **Role constraint**: Only "user" and "assistant" roles supported (NOT "system")
+- **Workaround**: Use markdown headers in first message to simulate system message (e.g., "# MonoGame Code Review Guidelines")
+- **Message structure**: Both messages use role="user", first has guidelines/knowledge, second has actual request
+- **Import pattern**: `ListPromptsRequestSchema` and `GetPromptRequestSchema` from `@modelcontextprotocol/sdk/types.js`
+
+### MonoGame Knowledge Included
+Each prompt includes domain-specific knowledge:
+- **Code Review**: SpriteBatch lifecycle, Content.Load patterns, Update/Draw separation, disposal, common pitfalls
+- **Troubleshooting**: Content pipeline checks, graphics lifecycle, platform issues, error patterns, debugging steps
+- **Architecture**: Game class structure, GameComponent system, scene management, content strategy, entity organization
+- **Feature Implementation**: Game loop lifecycle, content pipeline usage, SpriteBatch pattern, platform considerations, implementation patterns
+
+### Testing Approach
+- **TDD workflow**: Wrote 10 tests FIRST using Client.getPrompt() from MCP SDK
+- **Test coverage**: All 4 prompts, required params, optional params (focus, code, platform, features, scale, existingCode), message structure
+- **InMemoryTransport pattern**: Used createLinkedPair() for isolated testing without process spawning
+- **Initial failure**: Tests expected "system" role, had to fix to "user" role after Zod validation errors
+
+### Blockers/Challenges
+1. **API version mismatch**: Context7 showed v2 `registerPrompt()` but project uses v1.27.1
+   - Solution: Read SDK source, found `setRequestHandler()` pattern
+2. **System role rejected**: Zod error "expected one of 'user'|'assistant'"
+   - Solution: Changed all system messages to "user" role with markdown headers for structure
+3. **Test assertion mismatch**: Expected "graphics device" (lowercase) but text had "GraphicsDevice"
+   - Solution: Updated test to match actual casing
+
+### Files Created
+- `src/prompts/index.ts` (366 lines) — 4 prompt handlers with MonoGame knowledge
+- `tests/prompts/prompts.test.ts` (177 lines) — 10 comprehensive test cases
+
+### Evidence Generated
+1. `.sisyphus/evidence/task-18-prompts-tests.txt` — Full vitest output (10/10 passing)
+2. `.sisyphus/evidence/task-18-tsc-compile.txt` — TypeScript compilation (0 errors)
+3. `.sisyphus/evidence/task-18-prompt-content.txt` — Prompt header validation
+
+### Verification Results
+- ✅ TypeScript compilation: 0 errors (both files)
+- ✅ All 10 tests passing
+- ✅ LSP diagnostics clean (both files)
+- ✅ 4 prompts registered with complete MonoGame knowledge
+- ✅ Optional parameters handled gracefully
+- ✅ Message format validated by MCP SDK

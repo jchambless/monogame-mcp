@@ -1,0 +1,19 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mAPI Reference Resources[2m > [22mshould return API doc for valid class name SpriteBatch
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mAPI Reference Resources[2m > [22mshould return not found for nonexistent class
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mCode Examples Resources[2m > [22mshould return example doc for valid topic input-handling
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mCode Examples Resources[2m > [22mshould return not found for invalid example topic
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mContent Pipeline Resources[2m > [22mshould return pipeline doc for valid topic overview
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mContent Pipeline Resources[2m > [22mshould return not found for invalid pipeline topic
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mPlatform Guides Resources[2m > [22mshould return platform doc for desktopgl
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mPlatform Guides Resources[2m > [22mshould return not found for invalid platform
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mResource List[2m > [22mshould return all available resource URIs
+ [32m✓[39m tests/resources/resources.test.ts[2m > [22mResources[2m > [22mResource List[2m > [22mshould include metadata for each resource
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 18:56:01
+[2m   Duration [22m 791ms[2m (transform 83ms, setup 0ms, collect 348ms, tests 74ms, environment 0ms, prepare 160ms)[22m
+

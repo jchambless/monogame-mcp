@@ -1,0 +1,19 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould return code review prompt with system and user messages
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould include MonoGame best practices in code review system message
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould handle optional focus parameter in code review
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould return troubleshooting prompt with system and user messages
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould include diagnostic steps in troubleshooting system message
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould return architecture prompt with system and user messages
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould include architecture patterns in system message
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould return feature implementation prompt with system and user messages
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould include game loop lifecycle in feature implementation system message
+ [32m✓[39m tests/prompts/prompts.test.ts[2m > [22mMonoGame Prompts — TDD Tests[2m > [22mshould handle all optional parameters for all prompts
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 18:54:05
+[2m   Duration [22m 772ms[2m (transform 84ms, setup 0ms, collect 316ms, tests 28ms, environment 0ms, prepare 189ms)[22m
+

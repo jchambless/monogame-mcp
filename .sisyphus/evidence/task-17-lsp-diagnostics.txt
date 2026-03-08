@@ -1,0 +1,7 @@
+=== LSP Diagnostics for src/resources/index.ts ===
+No diagnostics found - file is clean
+
+=== LSP Diagnostics for tests/resources/resources.test.ts ===
+No diagnostics found - file is clean
+
+All TypeScript type guards added for union types in resource content
