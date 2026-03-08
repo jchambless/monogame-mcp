@@ -1,0 +1,52 @@
+Task 16: Build and Run Project Tool - Implementation Summary
+==============================================================
+
+Tool Name: monogame_build_run
+Location: src/tools/build-run.ts
+Test Location: tests/tools/build-run.test.ts
+
+IMPLEMENTATION DETAILS:
+-----------------------
+✓ TDD Approach: 22 comprehensive test cases written first
+✓ Tool handles two actions: "build" and "run"
+✓ Input validation using Zod schema
+✓ Prerequisite check for dotnet CLI
+✓ Configurable: Debug/Release configurations
+✓ Optional restore parameter (default: true)
+✓ 120-second timeout for long builds/runs
+✓ Output parsing: extracts error/warning counts
+✓ Error handling: suggests monogame_diagnose_error tool on failures
+✓ Markdown-formatted output for user-friendly results
+
+KEY FEATURES:
+-------------
+- Build action: dotnet build {project} -c {config} [--no-restore]
+- Run action: dotnet run --project {project} -c {config} [--no-restore]
+- Parses build output for: success/failure, error count, warning count, output path
+- Handles timeouts gracefully with partial output
+- Provides actionable suggestions on build failures
+
+TEST COVERAGE:
+--------------
+✓ Prerequisite checks (3 tests)
+✓ Build action (6 tests)
+✓ Run action (5 tests)
+✓ Input validation (5 tests)
+✓ Output formatting (3 tests)
+
+Total: 22/22 tests passing
+
+VERIFICATION:
+-------------
+✓ All tests pass: npx vitest run tests/tools/build-run.test.ts
+✓ LSP diagnostics: Clean (no errors/warnings)
+✓ TypeScript compilation: Success
+✓ Follows established CLI tool patterns from Tasks 13 & 15
+
+PATTERNS FOLLOWED:
+------------------
+- checkPrerequisite before execution
+- executeCommand with 120s timeout
+- Structured markdown output
+- Error suggestion workflow
+- Zod schema validation

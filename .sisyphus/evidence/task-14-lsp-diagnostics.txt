@@ -1,0 +1,2 @@
+src/tools/manage-content.ts: No diagnostics found
+tests/tools/manage-content.test.ts: No diagnostics found

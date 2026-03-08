@@ -965,3 +965,259 @@ Tool handler complete and tested. Ready for registration in `src/server.ts` duri
 - Result formatting approach: markdown sections per result (title, namespace, category, summary, key methods when available, first C# code block) with separators for multi-result responses.
 - Zod validation pattern: z.object with trimmed required query, enum category, bounded limit default; ZodError is caught and returned as MCP isError text response instead of throwing.
 - No-results UX: non-error markdown response includes query echo plus actionable search suggestions for class names, broader terms, and filter removal.
+
+## [2026-03-08 18:41] Task 14: Content Pipeline Management Tool
+
+- TDD order held: `tests/tools/manage-content.test.ts` was created first with 10 cases covering add/remove/list/info, validation failures, and missing file handling.
+- File-backed testing pattern is stable for mgcb tools: per-test temporary directory via `mkdtemp`, write initial `.mgcb`, then assert both response text and persisted file updates.
+- Importer/processor inference should chain `getImporterForExtension(path.extname(assetPath))` then `getProcessorForImporter(importer)` and only fail add when importer cannot be inferred and no override is supplied.
+- Current `removeContentEntry` utility returns a new `MgcbProject` (not boolean), so remove success detection should compare `entries.length` before/after.
+- Error handling convention for MCP tools: return `{ isError: true, content: [{ type: 'text', text }] }` for validation and operational failures rather than throwing.
+
+---
+
+## [2026-03-08 18:39] Task 15: Content Building Tool
+
+### Execution Summary
+- **Tool name**: `monogame_build_content` — builds MonoGame content using MGCB CLI
+- **TDD approach**: 12 comprehensive tests written first (exceeds 6 minimum requirement)
+- **All tests passing**: 12/12 ✓ (7ms execution)
+- **TypeScript compilation**: Clean (0 errors) ✓
+- **Timeout configuration**: 120000ms (120 seconds) for long content builds
+
+### Tool Architecture
+
+**Input Schema (Zod v4)**:
+```typescript
+{
+  mgcbPath: string (required, trimmed, non-empty),
+  platform: MonoGamePlatform (optional enum: DesktopGL, WindowsDX, Android, iOS),
+  rebuild: boolean (default: false),
+  clean: boolean (default: false)
+}
+```
+
+**Command Construction Pattern**:
+- Base: `mgcb {mgcbPath}`
+- Optional: `/platform:{platform}`, `/rebuild`, `/clean`
+- Example: `mgcb Content/Content.mgcb /platform:DesktopGL /rebuild`
+
+**Three-Path Logic**:
+1. Prerequisite missing → Install instructions (dotnet tool install -g dotnet-mgcb)
+2. Build timeout → Suggestions with troubleshooting steps
+3. Build failure → Formatted errors with exit code, stderr, stdout
+4. Build success → Parsed file count, formatted output
+
+### Key Design Decisions
+
+**120 Second Timeout**:
+- Rationale: Content builds can be very slow with many assets (textures, audio, fonts)
+- Larger than default 30s but within MAX_TIMEOUT_MS (120s from subprocess.ts)
+- Tested with timeout handling in tests
+
+**Output Parsing Strategy**:
+- `parseFileCount()` function extracts file count from stdout
+- Looks for patterns: "Processed X files" or "Build X files"
+- Returns null if no count found (non-critical, still shows success)
+
+**Markdown Output Formatting**:
+- Success: `# Build Successful` + file count + stdout in code block
+- Failure: `# Build Failed` + exit code + stderr errors + stdout
+- Timeout: `# Build Timeout` + troubleshooting suggestions
+- Install: `# MGCB Not Installed` + installation commands + verification
+
+**Prerequisite Check Pattern** (from Task 13):
+- Check `dotnet-mgcb` first before attempting build
+- Return structured install instructions if missing
+- Follows pattern: checkPrerequisite → return instructions OR execute command
+
+### Testing Coverage (12 tests)
+
+1. **Prerequisite missing** → Returns install instructions
+2. **Minimal arguments** (mgcbPath only) → Builds successfully
+3. **Platform flag** → Includes `/platform:DesktopGL` in command
+4. **Rebuild flag** → Includes `/rebuild` in command
+5. **Clean flag** → Includes `/clean` in command
+6. **All flags combined** → Includes all flags in correct order
+7. **Build failure** → Returns formatted error with exit code
+8. **Build timeout** → Returns timeout message with suggestions
+9. **120s timeout enforcement** → Verifies timeout=120000 in executeCommand call
+10. **Invalid platform** → Zod validation rejection
+11. **Missing mgcbPath** → Zod validation rejection
+12. **File count parsing** → Extracts "10 files" from stdout patterns
+
+### Output Parsing Insights
+
+**MGCB stdout patterns observed**:
+- "Building Content..." — Build start message
+- "Skip 3 files." — Files already up-to-date
+- "Build 7 files." — Files requiring rebuild
+- "Processed 10 files successfully." — Final count
+- Both "Processed X" and "Build X" patterns captured
+
+**Regex approach**:
+- Case-insensitive matching (`/i` flag)
+- Two patterns: "Processed X files" (preferred) or "Build X files" (fallback)
+- Returns null if no pattern matches (non-breaking)
+
+### Integration with Task 4 (Subprocess Utility)
+
+**Clean API Usage**:
+- `checkPrerequisite('dotnet-mgcb')` → `{ available, version?, message }`
+- `executeCommand('mgcb', args, { timeout })` → `SubprocessResult`
+- `SubprocessResult` fields: `exitCode, stdout, stderr, timedOut`
+
+**Security validation** (inherited from subprocess.ts):
+- Command allowlist: 'mgcb' is in ALLOWED_COMMANDS
+- Arg sanitization: No dangerous chars (`;`, `|`, `&`, `$`)
+- Timeout enforcement: 120000ms normalized and enforced
+
+### Gotchas & Solutions
+
+**Test Expectation Mismatch**:
+- Initial test expected "Build timed out" but implementation returns "Build Timeout"
+- Fixed test to match actual markdown header format
+- Added second assertion for "120 second timeout" in message body
+
+**Zod v4 Enum Validation**:
+- Used `z.nativeEnum(MonoGamePlatform)` for platform validation
+- Automatically validates against DesktopGL, WindowsDX, Android, iOS
+- Custom error message: "Invalid platform"
+
+**File Count Optional**:
+- parseFileCount returns `number | null` (not guaranteed to find count)
+- formatSuccess handles null case: "Content build completed." (generic message)
+- Non-critical: Success is determined by exitCode === 0
+
+### Files Created
+
+- `src/tools/build-content.ts` (215 lines) — Tool handler with MGCB build logic
+- `tests/tools/build-content.test.ts` (226 lines) — 12 comprehensive test cases
+
+### Evidence Generated
+
+1. `task-15-build-content-tests.txt` — Full test suite output (12 passing)
+2. `task-15-tsc-compile.txt` — TypeScript compilation verification (0 errors)
+3. `task-15-test-count.txt` — Test count verification (12 tests listed)
+4. `task-15-summary.txt` — Implementation summary with key code snippets
+
+### Verification Results
+
+- ✅ TypeScript compilation: 0 errors (both files)
+- ✅ All 12 tests passing (7ms execution)
+- ✅ Prerequisite checking implemented (dotnet-mgcb)
+- ✅ Command construction with optional flags (platform, rebuild, clean)
+- ✅ Timeout configured at 120 seconds
+- ✅ Output parsing extracts file count
+- ✅ Three-path error handling (prerequisite, timeout, failure)
+- ✅ Markdown formatting for all response types
+- ✅ Zod validation for input parameters
+
+### Key Technical Notes
+
+**MGCB Command Line Reference**:
+- `mgcb <file.mgcb>` — Build content project
+- `/platform:<platform>` — Target platform (DesktopGL, WindowsDX, Android, iOS)
+- `/rebuild` — Force rebuild all content
+- `/clean` — Clean intermediate files before build
+- Install: `dotnet tool install -g dotnet-mgcb`
+
+**Platform Values Match MonoGamePlatform Enum**:
+- Ensures consistency with types.ts (Task 3)
+- Validation happens at Zod schema level (runtime)
+- TypeScript enum provides compile-time safety
+
+**Timeout Trade-off**:
+- 120s is 4x the default timeout (30s)
+- Necessary for large content projects (100+ assets)
+- Prevents false timeouts on slower systems
+- Matches MAX_TIMEOUT_MS limit from subprocess.ts
+
+### Ready for Integration
+
+Tool handler complete and tested. Ready for registration in `src/server.ts` during integration phase (Task 22).
+
+**Export signature**:
+- `buildContentTool` — metadata object (name, description, inputSchema)
+- `handleBuildContent(args)` — async handler function returning CallToolResult
+
+### Lessons Learned
+
+1. **Timeout matters for content builds**: 30s default is insufficient for real MonoGame projects
+2. **Output parsing is fragile**: MGCB output format can vary; fallback patterns are essential
+3. **File count is nice-to-have**: Don't fail if parsing fails; success is determined by exit code
+4. **Install instructions should be comprehensive**: Include both install and update commands
+5. **TDD caught edge cases**: Tests for timeout, invalid inputs, prerequisite missing were written first
+6. **Markdown formatting consistency**: Follow same pattern as other tools (# headers, code blocks, sections)
+
+### No Blockers
+
+- All tests passing ✓
+- TypeScript compilation clean ✓
+- Prerequisite checking robust ✓
+- Command construction verified ✓
+- Output parsing tested with multiple patterns ✓
+- Ready for server integration (Task 22) ✓
+
+---
+
+## [2026-03-08 18:40] Task 13: Create Project Tool
+
+- TDD-first flow worked cleanly: wrote 8 tests before implementation, then implemented `monogame_create_project` to satisfy validation, prerequisite checks, template checks, and command execution behavior.
+- Tool contract pattern stayed consistent with prior tools: exported `createProjectTool` metadata object and `handleCreateProject(args)` handler returning MCP `CallToolResult` with `isError` on failures.
+- Project name validation is strict and predictable with `/^[a-zA-Z0-9_]{1,100}$/`; invalid names fail fast before any subprocess calls.
+- Prerequisite strategy: use `checkPrerequisite('dotnet')`, then explicitly verify MonoGame templates via `dotnet new list --tag MonoGame`; if missing, return install guidance (`dotnet new install MonoGame.Templates.CSharp`) without auto-install.
+- Template mapping aligns with MonoGame short names: desktopgl→mgdesktopgl, windowsdx→mgwindowsdx, android→mgandroid, ios→mgios, shared→mgshared.
+- Command execution pattern is secure and deterministic: always use `executeCommand('dotnet', ['new', mappedTemplate, '-n', projectName], { cwd })`, where `cwd` is `outputDirectory` or `process.cwd()`.
+
+## Task 16: Build and Run Project Tool (monogame_build_run)
+
+**Date**: 2026-03-08
+
+### Implementation Approach
+- **TDD Success**: Wrote 22 comprehensive tests first, then implemented to pass them
+- **Variable Shadowing Gotcha**: Initially shadowed `args` parameter with `args` variable inside function body. Fixed by renaming internal variable to `commandArgs`
+- **Mock Testing Pattern**: Used vitest mocks for subprocess module, allowing full test coverage without actual dotnet CLI execution
+- **Markdown Formatting**: Consistent use of `**Label**:` pattern for markdown formatting in output
+
+### CLI Tool Pattern Refinements
+1. **Prerequisite Check First**: Always check `dotnet` availability before attempting build/run
+2. **Timeout Configuration**: 120-second timeout is appropriate for builds (MAX_TIMEOUT_MS limit)
+3. **Output Parsing**: Use regex patterns to extract structured data from dotnet CLI output:
+   - Error count: `/(\d+)\s+Error\(s\)/i`
+   - Warning count: `/(\d+)\s+Warning\(s\)/i`
+   - Output path: `/\s+->\s+(.+\.dll)/`
+4. **Error Workflow**: Always suggest `monogame_diagnose_error` tool on failures for consistency
+
+### Test Suite Design
+- **Test Organization**: Group tests by feature area (Prerequisite Checks, Build Action, Run Action, Input Validation, Output Formatting)
+- **BeforeEach Pattern**: Mock setup in `beforeEach` for consistent test environment
+- **Mock Chaining**: Multiple mock calls in single test require checking `mock.calls` array
+- **Markdown Assertions**: Test for markdown structure (`**Label**:`) not plain text (`Label:`)
+
+### dotnet CLI Integration
+- **Build Command**: `dotnet build {project} -c {config} [--no-restore]`
+- **Run Command**: `dotnet run --project {project} -c {config} [--no-restore]`
+- **Configuration Values**: Only "Debug" and "Release" are standard
+- **Restore Flag**: `--no-restore` skips package restore (useful for CI/repeated builds)
+
+### Output Parsing Patterns
+```typescript
+const errorMatch = output.match(/(\d+)\s+Error\(s\)/i);
+const warningMatch = output.match(/(\d+)\s+Warning\(s\)/i);
+const succeededMatch = /Build succeeded/i.test(output);
+const failedMatch = /Build FAILED/i.test(output);
+const outputPathMatch = output.match(/\s+->\s+(.+\.dll)/);
+```
+
+### Lessons Learned
+- **Variable Naming**: Be careful with function parameter names vs. local variables
+- **Test-Driven Development**: Writing tests first caught the variable shadowing bug immediately
+- **Consistent Error Messaging**: Using established patterns (suggesting diagnose tool) improves UX
+- **Markdown Consistency**: Always use `**Bold**:` format for structured output labels
+- **Mock Verification**: Check both that mocks were called AND that they were called with correct arguments
+
+### Integration Points
+- Depends on: Task 4 (subprocess utility)
+- Patterns from: Tasks 13 (create-project), 15 (build-content)
+- Suggests: Task 14 (diagnose-error) on failures

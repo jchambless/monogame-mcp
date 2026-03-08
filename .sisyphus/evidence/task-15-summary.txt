@@ -1,0 +1,24 @@
+=== Build Content Tool Implementation Summary ===
+
+Tool Name: monogame_build_content
+Description: Build MonoGame content using MGCB CLI
+
+=== Input Parameters ===
+const inputSchema = z.object({
+  mgcbPath: z.string({ message: 'mgcbPath is required' }).trim().min(1, 'mgcbPath cannot be empty'),
+  platform: z.nativeEnum(MonoGamePlatform, { message: 'Invalid platform' }).optional(),
+  rebuild: z.boolean().default(false),
+  clean: z.boolean().default(false),
+});
+
+=== Prerequisite Check ===
+import { checkPrerequisite, executeCommand } from '../utils/subprocess.js';
+
+const inputSchema = z.object({
+  mgcbPath: z.string({ message: 'mgcbPath is required' }).trim().min(1, 'mgcbPath cannot be empty'),
+--
+  const prerequisite = await checkPrerequisite('dotnet-mgcb');
+
+
+=== Timeout Configuration ===
+    timeout: 120000,

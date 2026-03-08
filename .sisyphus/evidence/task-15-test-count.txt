@@ -1,0 +1,16 @@
+=== Test Count Verification ===
+12
+
+=== Test Names ===
+  it('should return install instructions when dotnet-mgcb is not available', async () => {
+  it('should build successfully with minimal arguments (mgcbPath only)', async () => {
+  it('should include platform flag when platform is specified', async () => {
+  it('should include rebuild flag when rebuild is true', async () => {
+  it('should include clean flag when clean is true', async () => {
+  it('should combine all flags when all options are specified', async () => {
+  it('should return error details when build fails', async () => {
+  it('should handle timeout during build', async () => {
+  it('should use 120 second timeout for long builds', async () => {
+  it('should reject invalid platform values', async () => {
+  it('should reject missing mgcbPath', async () => {
+  it('should parse file count from stdout', async () => {
