@@ -1221,7 +1221,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/index.ts, src/server.ts, tests/server.test.ts`
   - Pre-commit: `npx vitest run tests/server.test.ts`
 
-- [ ] 10. Tool — API Reference Lookup
+- [x] 10. Tool — API Reference Lookup
 
   **What to do**:
   - Create `src/tools/api-lookup.ts` with the API reference lookup tool
@@ -1325,7 +1325,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/api-lookup.ts, tests/tools/api-lookup.test.ts`
   - Pre-commit: `npx vitest run tests/tools/api-lookup.test.ts`
 
-- [ ] 11. Tool — Error Diagnosis
+- [x] 11. Tool — Error Diagnosis
 
   **What to do**:
   - Create `src/tools/diagnose-error.ts` with the error diagnosis tool
@@ -1422,7 +1422,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/tools/diagnose-error.ts, tests/tools/diagnose-error.test.ts`
   - Pre-commit: `npx vitest run tests/tools/diagnose-error.test.ts`
 
-- [ ] 12. Tool — Code Scaffolding
+- [x] 12. Tool — Code Scaffolding
 
   **What to do**:
   - Create `src/tools/scaffold-code.ts` with the code scaffolding tool
