@@ -2270,7 +2270,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `package.json, .npmignore (if created)`
   - Pre-commit: `npm run build && npm pack --dry-run`
 
-- [ ] 20. Dockerfile — Multi-Stage Build for Docker Distribution
+- [x] 20. Dockerfile — Multi-Stage Build for Docker Distribution
 
   **What to do**:
   - Create `Dockerfile` for building and running the MCP server in Docker
@@ -2394,7 +2394,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `Dockerfile, .dockerignore`
   - Pre-commit: `docker build -t monogame-mcp .`
 
-- [ ] 21. README.md — Setup, Usage, and Configuration Documentation
+- [x] 21. README.md — Setup, Usage, and Configuration Documentation
 
   **What to do**:
   - Create `README.md` with comprehensive usage documentation
@@ -2497,7 +2497,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `README.md`
   - Pre-commit: none
 
-- [ ] 22. Integration Test Suite — Full Server E2E with InMemoryTransport
+- [x] 22. Integration Test Suite — Full Server E2E with InMemoryTransport
 
   **What to do**:
   - Create `tests/integration/server-e2e.test.ts` with comprehensive end-to-end tests
