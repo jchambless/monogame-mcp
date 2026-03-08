@@ -1,0 +1,15 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Projects/monogame-mcp[39m
+
+ [32m✓[39m tests/server.test.ts[2m > [22mMCP Server — Integration Tests (TDD)[2m > [22mServer initializes without errors
+ [32m✓[39m tests/server.test.ts[2m > [22mMCP Server — Integration Tests (TDD)[2m > [22mServer responds to initialize with capabilities
+ [32m✓[39m tests/server.test.ts[2m > [22mMCP Server — Integration Tests (TDD)[2m > [22mServer lists tools with empty array initially
+ [32m✓[39m tests/server.test.ts[2m > [22mMCP Server — Integration Tests (TDD)[2m > [22mServer lists resources with empty array initially
+ [32m✓[39m tests/server.test.ts[2m > [22mMCP Server — Integration Tests (TDD)[2m > [22mServer lists prompts with empty array initially
+ [32m✓[39m tests/server.test.ts[2m > [22mMCP Server — Integration Tests (TDD)[2m > [22mServer factory function returns different instances
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m6 passed[39m[22m[90m (6)[39m
+[2m   Start at [22m 18:19:21
+[2m   Duration [22m 1.16s[2m (transform 70ms, setup 0ms, collect 252ms, tests 501ms, environment 0ms, prepare 190ms)[22m
+

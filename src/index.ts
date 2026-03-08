@@ -1,18 +1,34 @@
 #!/usr/bin/env node
 
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { createServer } from './server.js';
 
-// Initialize MCP server
-const _server = new Server({
-  name: 'monogame-mcp',
-  version: '0.1.0'
-}, {
-  capabilities: {}
-});
+/**
+ * Main entry point for MonoGame MCP Server
+ * 
+ * Creates server instance and connects stdio transport for JSON-RPC communication.
+ * The server processes requests from connected MCP clients over standard input/output.
+ */
+async function main() {
+  try {
+    // Create server using factory function
+    const server = createServer();
 
-// Setup stdio transport
-const _transport = new StdioServerTransport();
+    // Create stdio transport for JSON-RPC communication
+    const transport = new StdioServerTransport();
 
-// Server is initialized but not started yet
-// Tool/resource/prompt registration will happen in subsequent tasks
+    // Connect server to transport
+    // This starts listening for JSON-RPC messages on stdin
+    await server.connect(transport);
+
+    // Server is now running and will handle requests until process termination
+    // Tool/resource/prompt implementations added in Tasks 10-16
+  } catch (error) {
+    console.error('Failed to start MCP server:', error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  }
+}
+
+// Start the server
+main();
+
