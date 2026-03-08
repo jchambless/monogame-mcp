@@ -1,0 +1,52 @@
+# Dependencies (will be installed via npm ci in builder)
+node_modules
+
+# Build output (generated in builder stage)
+build
+dist
+
+# Tests
+tests
+
+# Sisyphus work directory
+.sisyphus
+
+# Git
+.git
+.gitignore
+
+# Markdown files (except docs)
+*.md
+!src/docs/**/*.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage
+.nyc_output
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NPM
+.npmignore
