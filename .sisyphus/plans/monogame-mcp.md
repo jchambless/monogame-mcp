@@ -2166,7 +2166,7 @@ Max Concurrent: 5 (Wave 2)
   - Files: `src/prompts/index.ts, tests/prompts/prompts.test.ts`
   - Pre-commit: `npx vitest run tests/prompts/prompts.test.ts`
 
-- [ ] 19. npm Packaging — package.json bin, files, prepublish scripts
+- [x] 19. npm Packaging — package.json bin, files, prepublish scripts
 
   **What to do**:
   - Update `package.json` with production-ready packaging configuration
