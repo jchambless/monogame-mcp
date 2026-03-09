@@ -99,8 +99,7 @@ describe('Packaging', () => {
     it('should list correct files in package', () => {
       const output = execSync('npm pack --dry-run 2>&1', {
         cwd: PROJECT_ROOT,
-        encoding: 'utf-8',
-        shell: 'cmd.exe'
+        encoding: 'utf-8'
       });
 
       // npm pack --dry-run shows tarball contents via npm notice
